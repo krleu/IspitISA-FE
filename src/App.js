@@ -2,7 +2,6 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-// Dodaje token na SVAKI zahtev, ako postoji
 axios.interceptors.request.use((config) => {
     const token = localStorage.getItem('jwtToken');
     if (token) {
@@ -12,7 +11,6 @@ axios.interceptors.request.use((config) => {
 }, (error) => Promise.reject(error));
 
 function App() {
-    // Stanja za Turnire
     const [turniri, setTurniri] = useState([]);
     const [naziv, setNaziv] = useState('');
     const [lokacija, setLokacija] = useState('');
@@ -24,7 +22,6 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('jwtToken'));
     const [isRegistering, setIsRegistering] = useState(false);
 
-    // Ako token postane nevažeći (401/403), automatski izloguj korisnika
     useEffect(() => {
         const interceptorId = axios.interceptors.response.use(
             (response) => response,
